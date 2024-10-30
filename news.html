@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact Us - Your Company Name</title>
 
-  <!-- 其他meta、title等标签 -->
-  <link rel="stylesheet" href="common.css">
+
+<link rel="stylesheet" href="common.css">
+
+
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=YOUR_BAIDU_MAP_API_KEY"></script>
+
+<style>
+  #map {
+    height: 300px; 
+    width: 100%;   
+  }
+  @media (max-width: 768px) {
+    #map {
+      height: 200px; 
+    }
+  }
+</style>
 
 </head>
 <body>
@@ -18,19 +32,17 @@
 
 <nav class="navbar">
   <a href="index.html">Home</a>
-  <a href="support.html">support</a>
-  <a href="product.html">product</a>
+  <a href="support.html">Support</a>
+  <a href="product.html">Product</a>
   <a href="about us.html">About Us</a>
   <a href="news.html" class="active">Contact</a>
- 
 </nav>
 
 <main class="contact-container">
   <section class="contact-info">
     <div class="contact-info-item">
       <h3>Address</h3>
-      <p> 13th Street 47 W 13th St<br>New York, NY 10011, USA
-         Anytown, USA 12345</p>
+      <p>13th Street 47 W 13th St<br>New York, NY 10011, USA</p>
     </div>
     <div class="contact-info-item">
       <h3>Phone</h3>
@@ -41,7 +53,8 @@
       <p>1122334455@google.com</p>
     </div>
   </section>
-  <img src="100.jpg" alt="Description of the image" width="550" height="275">
+  
+  <div id="map"></div>
 
   <form class="contact-form" action="submit.php" method="post">
     <label for="name">Name:</label>
@@ -60,6 +73,31 @@
 <footer class="footer">
   <p>Contact information</p>
 </footer>
+
+
+<script>
+
+  function loadBaiduMap() {
+    var map = new BMap.Map("map"); 
+    var point = new BMap.Point(-73.994662, 40.742245); 
+    map.centerAndZoom(point, 15); 
+
+    map.addControl(new BMap.NavigationControl());
+    map.addControl(new BMap.ScaleControl());
+    map.addControl(new BMap.OverviewMapControl());
+    map.enableScrollWheelZoom(); 
+  }
+
+  if (document.addEventListener) {
+    document.addEventListener('DOMContentLoaded', loadBaiduMap);
+  } else if (document.attachEvent) {
+    document.attachEvent('onreadystatechange', function () {
+      if (document.readyState === 'complete') {
+        loadBaiduMap();
+      }
+    });
+  }
+</script>
 
 </body>
 </html>
